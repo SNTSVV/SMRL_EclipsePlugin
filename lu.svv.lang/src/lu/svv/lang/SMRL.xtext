@@ -1,0 +1,89 @@
+grammar lu.svv.lang.SMRL with org.eclipse.xtext.xbase.Xbase
+
+generate sMRL "http://www.svv.lu/lang/SMRL"
+
+import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
+
+import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
+ 
+SMRL:
+    importSection=XImportSection?
+    elements+=AbstractElement*;
+ 
+AbstractElement:
+    PackageDeclaration | Entity;
+ 
+PackageDeclaration:
+    'package' name=QualifiedName '{'
+        elements+=AbstractElement*
+    '}';
+ 
+Entity:
+    'MR' name=ValidID ('extends' superType=JvmTypeReference)? '{'
+        features+=Feature*
+    '}';
+ 
+Feature:
+    Operation;
+ 
+Property:
+    name=ValidID ':' type=JvmTypeReference;
+ 
+Operation:
+    body=XBlockExpression;
+    
+//@Override 
+//XPrimaryExpression returns xbase::XExpression: 
+//	XConstructorCall |
+//	XBlockExpression |
+//	XSwitchExpression |
+//	XSynchronizedExpression |
+//	XFeatureCall |
+//	XLiteral |
+//	XIfExpression |
+//	XForLoopExpression |
+//	XBasicForLoopExpression |
+//	XWhileExpression |
+//	XDoWhileExpression |
+//	XThrowExpression |
+//	XReturnExpression |
+//	XTryCatchFinallyExpression |
+//	XParenthesizedExpression |
+//	MRData;
+
+
+//
+//The following lea dto a missing type exception.
+//In principle we may extend the XBaseTypeComputer (see https://books.google.lu/books?id=NkrWDQAAQBAJ&pg=PA372&lpg=PA372&dq=%22Missing+type+computation+for+expression+type%22&source=bl&ots=hrUCxgC9cr&sig=uzKljPz4gH9EpJO6nFGbCUjjVPM&hl=en&sa=X&ved=2ahUKEwip-JaczJffAhUK36QKHekqAwMQ6AEwAHoECAEQAQ#v=onepage&q=%22Missing%20type%20computation%20for%20expression%20type%22&f=false)
+//	
+//@Override
+//XFeatureCall returns xbase::XExpression:
+//	{XFeatureCall}
+//	('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
+//	feature=[types::JvmIdentifiableElement|IdOrSuper]
+//	(=>explicitOperationCall?='('
+//		(
+//		    featureCallArguments+=XShortClosure
+//		  | featureCallArguments+=XExpression (',' featureCallArguments+=XExpression)*
+//		)?
+//	')')?
+//	(=>explicitOperationCall?='{'
+//		(
+//		    featureCallArguments+=XShortClosure
+//		  | featureCallArguments+=XExpression (',' featureCallArguments+=XExpression)*
+//		)?
+//	'}')?
+//featureCallArguments+=XClosure?;	
+	
+//  
+//MRImplies returns xbase::XExpression:
+//	{MRImplies}
+//	'implies' a=XExpression 
+//	(=> ',' b=XExpression )
+//	//(=>({xbase::XBinaryOperation.leftOperand=current}) rightOperand=XAndExpression)*;
+//;  
+
+//MRData:
+//	{MRData}
+//	'`'id=ValidID'{'value=INT'}`'
+//;
