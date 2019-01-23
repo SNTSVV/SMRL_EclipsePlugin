@@ -21,8 +21,23 @@ class SMRLParsingTest {
 	@Test
 	def void loadModel() {
 		val result = parseHelper.parse('''
-			Hello Xtext!
+			import static lu.svv.mr.language.Operations.*
+			import lu.svv.mr.language.Action;
+			
+			package lu.svv.mr.owasp {
+			  MR OTG_AUTHZ_002 {
+			   {
+			     for ( Action action : Input(1).actions() ){
+				   IMPLIES(
+				     cannotReachThroughGUI ( User(2), action.url ) &&
+				     equal( Input(2), changeCredentials(Input(1), User(2)) )
+					 ,
+					 NOT( Output(Input(1)).equals(Output(Input(2)))));
+			     }
+			   } 
+			}}
 		''')
+		println(result);
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
 		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')

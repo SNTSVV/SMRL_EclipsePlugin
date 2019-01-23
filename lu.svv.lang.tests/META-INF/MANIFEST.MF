@@ -14,3 +14,4 @@ Require-Bundle: lu.svv.lang,
  org.objectweb.asm;bundle-version="[7.0.0,7.1.0)";resolution:=optional
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: lu.svv.lang.tests;x-internal=true
+Import-Package: org.junit.runner

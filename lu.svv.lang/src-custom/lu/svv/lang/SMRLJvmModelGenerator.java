@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -166,7 +167,22 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 			} else {
 				processBlockExpression(internal);
 			}
+		} else if ( expression instanceof XForLoopExpression ) {
+			XForLoopExpression exp = (XForLoopExpression) expression;
+
 			
+			XExpression internal = ((XForLoopExpression) exp).getEachExpression();
+			
+			if ( internal instanceof XFeatureCall ) {
+				HashMap<Integer,XExpression> toSet = new HashMap<Integer,XExpression>();
+				handleRewritingOfFeatureCall(toSet, 0, exp);
+				
+				if ( toSet.size() > 0 ) {
+					((XForLoopExpression) exp).setEachExpression(toSet.get(0));
+				}
+			} else {
+				processBlockExpression(internal);
+			}
 		} else if ( expression instanceof XBlockExpression ) {
 
 			XBlockExpression b = (XBlockExpression) expression;
