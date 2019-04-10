@@ -25,6 +25,7 @@ import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -261,7 +262,7 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 		//{ PROPERTY HOLDS }
 		XBlockExpressionImpl nrhs = (XBlockExpressionImpl) XbaseFactory.eINSTANCE.createXBlockExpression();
 		XStringLiteral strLit = XbaseFactory.eINSTANCE.createXStringLiteral();
-		strLit.setValue("//PROPERTY HOLDS");
+		strLit.setValue("//EXPRESSION_PASS //PROPERTY HOLDS");
 		nrhs.getExpressions().add(strLit);
 		notIfExp.setThen(nrhs);
 
@@ -309,8 +310,11 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 
 		//{ PROPERTY HOLDS }
 		XBlockExpressionImpl nrhs = (XBlockExpressionImpl) XbaseFactory.eINSTANCE.createXBlockExpression();
+		
+
+		
 		XStringLiteral strLit = XbaseFactory.eINSTANCE.createXStringLiteral();
-		strLit.setValue("//PROPERTY HOLDS");
+		strLit.setValue("//EXPRESSION_PASS //PROPERTY HOLDS");
 		nrhs.getExpressions().add(strLit);
 		notIfExp.setThen(nrhs);
 
@@ -374,6 +378,14 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 			ifExp.setThen(retFalse);
 		}
 		
+		//The else branch is needed only to keep track of passing metamorphic expressions
+		{
+			XBlockExpressionImpl nrhs = (XBlockExpressionImpl) XbaseFactory.eINSTANCE.createXBlockExpression();
+			XStringLiteral strLit = XbaseFactory.eINSTANCE.createXStringLiteral();
+			strLit.setValue("//EXPRESSION_PASS //PROPERTY HOLDS");
+			nrhs.getExpressions().add(strLit);
+			ifExp.setElse(nrhs);
+		}
 		
 		
 
@@ -407,7 +419,7 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 			//{ PROPERTY a HOLDS }
 			XBlockExpressionImpl _a_holds_Exp = (XBlockExpressionImpl) XbaseFactory.eINSTANCE.createXBlockExpression();
 			XStringLiteral strLit = XbaseFactory.eINSTANCE.createXStringLiteral();
-			strLit.setValue("//PROPERTY a HOLDS");
+			strLit.setValue("//EXPRESSION_PASS //PROPERTY a HOLDS");
 			_a_holds_Exp.getExpressions().add(strLit);
 			
 			
@@ -461,7 +473,7 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 			//{ PROPERTY a HOLDS }
 			XBlockExpressionImpl _a_holds_Exp = (XBlockExpressionImpl) XbaseFactory.eINSTANCE.createXBlockExpression();
 			XStringLiteral strLit = XbaseFactory.eINSTANCE.createXStringLiteral();
-			strLit.setValue("//PROPERTY a HOLDS");
+			strLit.setValue("//EXPRESSION_PASS //PROPERTY a HOLDS");
 			_a_holds_Exp.getExpressions().add(strLit);
 			ifExp.setThen(_a_holds_Exp);
 		}
@@ -478,7 +490,7 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 				//{ PROPERTY b HOLDS }
 				XBlockExpressionImpl _b_holds_Exp = (XBlockExpressionImpl) XbaseFactory.eINSTANCE.createXBlockExpression();
 				XStringLiteral strLit = XbaseFactory.eINSTANCE.createXStringLiteral();
-				strLit.setValue("//PROPERTY b HOLDS");
+				strLit.setValue("//EXPRESSION_PASS //PROPERTY b HOLDS");
 				_b_holds_Exp.getExpressions().add(strLit);
 				_a_not_holds_Exp.setThen(_b_holds_Exp);
 			}
@@ -691,6 +703,8 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 
 		String s = seq.toString();
 		s = s.replace("void mr()", "boolean mr()");
+		
+		s = s.replace("/* \"//EXPRESSION_PASS", "expressionPass(); /*");
 		return s.subSequence(0, s.length());
 	}
 
