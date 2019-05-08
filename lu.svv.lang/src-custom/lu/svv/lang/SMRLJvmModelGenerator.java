@@ -277,6 +277,14 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 		//if(a)
 		ifExp.setIf(lhs);
 		ifExp.setThen(notIfExp);
+		
+		{
+			XBlockExpressionImpl nrhsP = (XBlockExpressionImpl) XbaseFactory.eINSTANCE.createXBlockExpression();
+			XStringLiteral strLitP = XbaseFactory.eINSTANCE.createXStringLiteral();
+			strLitP.setValue("//EXPRESSION_PASS //PROPERTY HOLDS");
+			nrhsP.getExpressions().add(strLitP);
+			ifExp.setElse(nrhsP);
+		}
 
 
 		toSet.put(c, ifExp);
