@@ -71,6 +71,11 @@ import com.google.inject.Inject;
 public class SMRLJvmModelGenerator extends JvmModelGenerator {
 
 
+//	private String PACKAGE_NAME = "lu.svv.mr.language";
+	private String PACKAGE_NAME = "ase2019.mr.language";
+
+	private static final boolean ASE2019 = true;
+	
 	@Inject JvmTypesBuilder builder;
 	@Inject JvmTypeReferenceBuilder rbuilder;
 
@@ -668,7 +673,8 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 	protected ITreeAppendable _generateMember(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
 
 		JvmGenericType type = TypesFactory.eINSTANCE.createJvmGenericType();
-		type.setPackageName("lu.svv.mr.language");
+		
+		type.setPackageName(PACKAGE_NAME);
 		type.setSimpleName("MR");
 
 		System.out.println(it);
@@ -691,11 +697,17 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 	@Override
 	protected ITreeAppendable _generateBody(JvmGenericType it, ITreeAppendable appendable, GeneratorConfig config) {
 		JvmGenericType type = TypesFactory.eINSTANCE.createJvmGenericType();
-		type.setPackageName("lu.svv.mr.language");
-		type.setSimpleName("MR");
+		
 
+		type.setPackageName(PACKAGE_NAME);
+
+
+		type.setSimpleName("MR");
+		
 		System.out.println(it); //ADD IMPORT HERE
-		appendable.append("import lu.svv.mr.language.MR;");
+		
+		appendable.append("import "+PACKAGE_NAME+".MR;");
+		
 		appendable.newLine();
 		appendable.newLine();
 
@@ -752,8 +764,11 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 	@Override
 	public ITreeAppendable generateBody(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
 		JvmGenericType type = TypesFactory.eINSTANCE.createJvmGenericType();
-		type.setPackageName("lu.svv.mr.language");
-		type.setSimpleName("MR");
+		
+		
+		type.setPackageName(PACKAGE_NAME);
+		type.setSimpleName("MR");	
+
 
 		System.out.println(type.getExtendedClass());
 
