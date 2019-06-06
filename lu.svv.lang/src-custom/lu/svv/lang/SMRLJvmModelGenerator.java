@@ -71,10 +71,10 @@ import com.google.inject.Inject;
 public class SMRLJvmModelGenerator extends JvmModelGenerator {
 
 
-//	private String PACKAGE_NAME = "lu.svv.mr.language";
-	private String PACKAGE_NAME = "ase2019.mr.language";
+	private String PACKAGE_NAME = "smrl.mr.language";
+//	private String PACKAGE_NAME = "ase2019.mr.language";
 
-	private static final boolean ASE2019 = true;
+//	private static final boolean ASE2019 = true;
 	
 	@Inject JvmTypesBuilder builder;
 	@Inject JvmTypeReferenceBuilder rbuilder;
@@ -255,13 +255,17 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 		//							}
 		//						}
 
-		XIfExpressionImpl notIfExp = (XIfExpressionImpl) XbaseFactory.eINSTANCE.createXIfExpression();
+		
 
 
 
 
 		//if(b)
-		notIfExp.setIf(rhs);
+		
+		
+		
+		XIfExpressionImpl if_B = (XIfExpressionImpl) XbaseFactory.eINSTANCE.createXIfExpression();
+		if_B.setIf(rhs);
 
 
 		//{ PROPERTY HOLDS }
@@ -269,30 +273,58 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 		XStringLiteral strLit = XbaseFactory.eINSTANCE.createXStringLiteral();
 		strLit.setValue("//EXPRESSION_PASS //PROPERTY HOLDS");
 		nrhs.getExpressions().add(strLit);
-		notIfExp.setThen(nrhs);
+		if_B.setThen(nrhs);
 
 
 		//{return false}
 		XReturnExpression retFalse = XbaseFactory.eINSTANCE.createXReturnExpression();
 		XBooleanLiteral falseLit = XbaseFactory.eINSTANCE.createXBooleanLiteral();
 		retFalse.setExpression(falseLit);
-		notIfExp.setElse(retFalse);
+		if_B.setElse(retFalse);
+		
+		
+		XBlockExpressionImpl if_B_Block = createBlockWithIfCounter(if_B);
 
-		XIfExpressionImpl ifExp = (XIfExpressionImpl) XbaseFactory.eINSTANCE.createXIfExpression();
+		
+		
+		XIfExpressionImpl if_A = (XIfExpressionImpl) XbaseFactory.eINSTANCE.createXIfExpression();
 		//if(a)
-		ifExp.setIf(lhs);
-		ifExp.setThen(notIfExp);
+		if_A.setIf(lhs);
+		if_A.setThen(if_B_Block);
 		
 		{
 			XBlockExpressionImpl nrhsP = (XBlockExpressionImpl) XbaseFactory.eINSTANCE.createXBlockExpression();
 			XStringLiteral strLitP = XbaseFactory.eINSTANCE.createXStringLiteral();
 			strLitP.setValue("//EXPRESSION_PASS //PROPERTY HOLDS");
 			nrhsP.getExpressions().add(strLitP);
-			ifExp.setElse(nrhsP);
+			if_A.setElse(nrhsP);
 		}
 
+		XBlockExpressionImpl if_A_Block = createBlockWithIfCounter(if_A);
+		
 
-		toSet.put(c, ifExp);
+		toSet.put(c, if_A_Block);
+	}
+
+//	private XBlockExpressionImpl createIfCounterBlock() {
+//		XBlockExpressionImpl mainBlock = (XBlockExpressionImpl) XbaseFactory.eINSTANCE.createXBlockExpression();
+//		XStringLiteral conditionsCounterStr = createConditionsCounterString();
+//		mainBlock.getExpressions().add(conditionsCounterStr);
+//		return mainBlock;
+//	}
+	
+	private XBlockExpressionImpl createBlockWithIfCounter(XIfExpressionImpl if_B) {
+		XBlockExpressionImpl mainBlock = (XBlockExpressionImpl) XbaseFactory.eINSTANCE.createXBlockExpression();
+		XStringLiteral conditionsCounterStr = createConditionsCounterString();
+		mainBlock.getExpressions().add(conditionsCounterStr);
+		mainBlock.getExpressions().add(if_B);
+		return mainBlock;
+	}
+
+	private XStringLiteral createConditionsCounterString() {
+		XStringLiteral conditionsCounterStr = XbaseFactory.eINSTANCE.createXStringLiteral();
+		conditionsCounterStr.setValue("//IF_CONDITION_COUNTER");
+		return conditionsCounterStr;
 	}
 	
 	private void handleAnd(XFeatureCall f, int c, HashMap<Integer, XExpression> toSet) {
@@ -312,13 +344,15 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 		//									return false;
 		//								}
 
-		XIfExpressionImpl notIfExp = (XIfExpressionImpl) XbaseFactory.eINSTANCE.createXIfExpression();
-
+		
+		
+		
 
 
 
 		//if(b)
-		notIfExp.setIf(rhs);
+		XIfExpressionImpl if_B = (XIfExpressionImpl) XbaseFactory.eINSTANCE.createXIfExpression();
+		if_B.setIf(rhs);
 
 
 		//{ PROPERTY HOLDS }
@@ -329,32 +363,35 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 		XStringLiteral strLit = XbaseFactory.eINSTANCE.createXStringLiteral();
 		strLit.setValue("//EXPRESSION_PASS //PROPERTY HOLDS");
 		nrhs.getExpressions().add(strLit);
-		notIfExp.setThen(nrhs);
+		if_B.setThen(nrhs);
 
 		{
 			//{return false}
 			XReturnExpression retFalse = XbaseFactory.eINSTANCE.createXReturnExpression();
 			XBooleanLiteral falseLit = XbaseFactory.eINSTANCE.createXBooleanLiteral();
 			retFalse.setExpression(falseLit);
-			notIfExp.setElse(retFalse);
+			if_B.setElse(retFalse);
 		}
+		XBlockExpressionImpl if_B_block = createBlockWithIfCounter(if_B);
 		
-		XIfExpressionImpl ifExp = (XIfExpressionImpl) XbaseFactory.eINSTANCE.createXIfExpression();
+		
 		//if(a)
-		ifExp.setIf(lhs);
-		ifExp.setThen(notIfExp);
+		XIfExpressionImpl if_A = (XIfExpressionImpl) XbaseFactory.eINSTANCE.createXIfExpression();
+		if_A.setIf(lhs);
+		if_A.setThen(if_B_block);
 		
 		{
 			//{return false}
 			XReturnExpression retFalse = XbaseFactory.eINSTANCE.createXReturnExpression();
 			XBooleanLiteral falseLit = XbaseFactory.eINSTANCE.createXBooleanLiteral();
 			retFalse.setExpression(falseLit);
-			ifExp.setElse(retFalse);
+			if_A.setElse(retFalse);
 		}
 		
+		XBlockExpressionImpl if_A_block = createBlockWithIfCounter(if_A);
 
 
-		toSet.put(c, ifExp);
+		toSet.put(c, if_A_block);
 	}
 	
 	
@@ -366,19 +403,15 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 
 		//We generate:		
 		//						if(a) {
-		//							PROPERTY HOLDS
+		//							return false;
 		//						} else {
-		//							if(b) {
-		//								PROPERTY HOLDS
-		//							}else {
-		//								return false;
-		//							}
+		//							PROPERTY HOLDS
 		//						} 
 
 		
-		XIfExpressionImpl ifExp = (XIfExpressionImpl) XbaseFactory.eINSTANCE.createXIfExpression();
+		XIfExpressionImpl if_A = (XIfExpressionImpl) XbaseFactory.eINSTANCE.createXIfExpression();
 		//if(a)
-		ifExp.setIf(lhs);
+		if_A.setIf(lhs);
 	
 		{
 			
@@ -388,7 +421,7 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 			retFalse.setExpression(falseLit);
 	
 			
-			ifExp.setThen(retFalse);
+			if_A.setThen(retFalse);
 		}
 		
 		//The else branch is needed only to keep track of passing metamorphic expressions
@@ -397,13 +430,13 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 			XStringLiteral strLit = XbaseFactory.eINSTANCE.createXStringLiteral();
 			strLit.setValue("//EXPRESSION_PASS //PROPERTY HOLDS");
 			nrhs.getExpressions().add(strLit);
-			ifExp.setElse(nrhs);
+			if_A.setElse(nrhs);
 		}
 		
 		
+		XBlockExpressionImpl if_A_block = createBlockWithIfCounter(if_A);
 
-
-		toSet.put(c, ifExp);
+		toSet.put(c, if_A_block);
 	}
 	
 	private void handleTrue(XFeatureCall f, int c, HashMap<Integer, XExpression> toSet) {
@@ -416,17 +449,14 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 		//						if(a) {
 		//							PROPERTY HOLDS
 		//						} else {
-		//							if(b) {
-		//								PROPERTY HOLDS
-		//							}else {
 		//								return false;
-		//							}
+		//							
 		//						} 
 
 		
-		XIfExpressionImpl ifExp = (XIfExpressionImpl) XbaseFactory.eINSTANCE.createXIfExpression();
+		XIfExpressionImpl if_A = (XIfExpressionImpl) XbaseFactory.eINSTANCE.createXIfExpression();
 		//if(a)
-		ifExp.setIf(lhs);
+		if_A.setIf(lhs);
 	
 		{
 			//{ PROPERTY a HOLDS }
@@ -437,7 +467,7 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 			
 			
 			
-			ifExp.setThen(_a_holds_Exp);
+			if_A.setThen(_a_holds_Exp);
 		}
 		
 		{
@@ -449,14 +479,14 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 			retFalse.setExpression(falseLit);
 //			_a_holds_Exp.getExpressions().add(falseLit);
 			
-			ifExp.setElse(retFalse);
+			if_A.setElse(retFalse);
 		}
 		
 		
-		
+		XBlockExpressionImpl if_A_block = createBlockWithIfCounter(if_A);
 
 
-		toSet.put(c, ifExp);
+		toSet.put(c, if_A_block);
 	}
 	
 	
@@ -465,7 +495,7 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 		XExpression lhs = args.get(0);
 		XExpression rhs = args.get(1);
 
-
+		
 		//We generate:		
 		//						if(a) {
 		//							PROPERTY HOLDS
@@ -478,9 +508,9 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 		//						} 
 
 		
-		XIfExpressionImpl ifExp = (XIfExpressionImpl) XbaseFactory.eINSTANCE.createXIfExpression();
+		XIfExpressionImpl if_A = (XIfExpressionImpl) XbaseFactory.eINSTANCE.createXIfExpression();
 		//if(a)
-		ifExp.setIf(lhs);
+		if_A.setIf(lhs);
 	
 		{
 			//{ PROPERTY a HOLDS }
@@ -488,16 +518,17 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 			XStringLiteral strLit = XbaseFactory.eINSTANCE.createXStringLiteral();
 			strLit.setValue("//EXPRESSION_PASS //PROPERTY a HOLDS");
 			_a_holds_Exp.getExpressions().add(strLit);
-			ifExp.setThen(_a_holds_Exp);
+			if_A.setThen(_a_holds_Exp);
 		}
 		
 		//else !a
 		{
-			XIfExpressionImpl _a_not_holds_Exp = (XIfExpressionImpl) XbaseFactory.eINSTANCE.createXIfExpression();
+			XIfExpressionImpl if_B = (XIfExpressionImpl) XbaseFactory.eINSTANCE.createXIfExpression();
 			
-			_a_not_holds_Exp.setIf(rhs);
+			if_B.setIf(rhs);
 			
-			ifExp.setElse(_a_not_holds_Exp);
+			XBlockExpressionImpl if_B_block = createBlockWithIfCounter(if_B);
+			if_A.setElse(if_B_block);
 			
 			{	//b holds
 				//{ PROPERTY b HOLDS }
@@ -505,7 +536,7 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 				XStringLiteral strLit = XbaseFactory.eINSTANCE.createXStringLiteral();
 				strLit.setValue("//EXPRESSION_PASS //PROPERTY b HOLDS");
 				_b_holds_Exp.getExpressions().add(strLit);
-				_a_not_holds_Exp.setThen(_b_holds_Exp);
+				if_B.setThen(_b_holds_Exp);
 			}
 			
 			
@@ -518,7 +549,7 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 				XBooleanLiteral falseLit = XbaseFactory.eINSTANCE.createXBooleanLiteral();
 				retFalse.setExpression(falseLit);
 				
-				_a_not_holds_Exp.setElse(retFalse);
+				if_B.setElse(retFalse);
 			}
 			
 			
@@ -526,8 +557,9 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 		}
 		
 
+		XBlockExpressionImpl if_A_block = createBlockWithIfCounter(if_A);
 
-		toSet.put(c, ifExp);
+		toSet.put(c, if_A_block);
 	}
 	
 	
@@ -725,6 +757,10 @@ public class SMRLJvmModelGenerator extends JvmModelGenerator {
 		s = s.replace("void mr()", "boolean mr()");
 		
 		s = s.replace("/* \"//EXPRESSION_PASS", "expressionPass(); /*");
+		
+		s = s.replace("/* \"//IF_CONDITION_COUNTER\" */", 
+				"ifThenBlock();");
+		
 		return s.subSequence(0, s.length());
 	}
 
