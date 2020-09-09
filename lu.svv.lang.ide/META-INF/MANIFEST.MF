@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Automatic-Module-Name: lu.svv.lang.ide
 Bundle-ManifestVersion: 2
-Bundle-Name: lu.svv.lang.ide
-Bundle-Vendor: My Company
+Bundle-Name: smrl.lang.ide
+Bundle-Vendor: Eclipse.org
 Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: lu.svv.lang.ide; singleton:=true
 Bundle-ActivationPolicy: lazy
