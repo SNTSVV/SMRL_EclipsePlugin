@@ -10,7 +10,6 @@ import lu.svv.lang.AbstractSMRLRuntimeModule;
  */
 @SuppressWarnings("all")
 public class SMRLRuntimeModule extends AbstractSMRLRuntimeModule {
-	
 	public Class<? extends org.eclipse.xtext.generator.IGenerator> bindIGenerator() {
 		return SMRLJvmModelGenerator.class;
 	}
