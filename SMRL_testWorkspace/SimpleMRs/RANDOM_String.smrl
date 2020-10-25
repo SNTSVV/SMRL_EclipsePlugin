@@ -1,0 +1,17 @@
+import static smrl.mr.language.Operations.*
+import static smrl.mr.language.Operations.Input
+
+
+package smrl.mr.test.pass {
+
+MR RandomString {
+	{
+		var x = RandomValue("");
+		System.out.println(x);
+		NOT ( NULL(x) );
+	
+	}
+
+}
+
+}

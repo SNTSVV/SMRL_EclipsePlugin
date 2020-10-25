@@ -1,0 +1,19 @@
+import static smrl.mr.language.Operations.*
+import smrl.mr.language.Action;
+
+package owasp {
+  MR OTG_AUTHZ_002 {
+   { 
+     for ( Action action : Input(1).actions() ){
+	   IMPLIES(
+	     cannotReachThroughGUI( User(2), action.url )    			  //1st 
+	        && !isSupervisorOf( User(2), action.user )				  //par 
+	     	&& !isError(Output( Input(1),action.position) )		      //of
+	     	&& EQUAL( Input(2), changeCredentials(Input(1), User(2)) )//IMPLIES
+		 , 
+		 	NOT( Output(Input(1),action.position).equals(	//2nd par of 
+		 		Output(Input(2),action.position) ) ) 		//IMPLIES
+	   ); //end-IMPLIES
+     } //end-for  
+  }} //end-MR
+}//end-package

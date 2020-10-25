@@ -1,0 +1,14 @@
+import static smrl.mr.language.Operations.*
+import static smrl.mr.language.Operations.Input
+
+package smrl.mr.test.fail {
+
+MR AND_fail2 {
+	{
+		AND(
+			Input(1).equals( Input(1) ),
+				Input(2).equals( Input(1) ) )
+		}
+	
+	}
+}

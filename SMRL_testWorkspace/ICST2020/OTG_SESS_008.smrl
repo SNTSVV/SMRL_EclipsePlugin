@@ -1,0 +1,37 @@
+import static smrl.mr.language.Operations.*;
+import smrl.mr.language.Action;
+
+package smrl.mr.owasp{
+
+/**
+ * An action that (1) is available without logging in and (2) generates a session,
+ * should not enable a user to execute an action that requires to be logged in.
+ * 
+ * This MR iterates over all the actions of the input.
+ * 
+ * The 1st parameter of the operator IMPLIES is a boolean expression with three clauses joined 
+ * with logical conjunction.
+ * The 1st clause checks that the current action is not available without being logged in.
+ * The 2nd clause looks for an action available without being logged-in that generates a session. 
+ * The 3rd clause defines a follow-up input that executes two actions, the action available without being logged in, and
+ * the selected action (i.e., the one available only by being logged-in).
+ * 
+ * The 2nd parameter of IMPLIES checks that the output of the action is different when execute with and without
+ * being logged in (even if after an action that does not require a log-in but generates a session).
+ */ 
+MR OTG_SESS_008 {
+	{
+		for ( Action action : Input(1).actions() ){
+			IMPLIES( notAvailableWithoutLoggingIn( action ) &&
+				NOT ( NULL ( ActionAvailableWithoutLogin().getSession() ) ) &&
+				EQUAL ( Input(2) ,  Input( ActionAvailableWithoutLogin(), action ) ) 
+				, different ( Output( Input(1), action.position ), Output( Input(2), 1 ) ) ); 
+		}
+	}
+}
+}
+
+
+
+
+

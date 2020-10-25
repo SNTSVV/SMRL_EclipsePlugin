@@ -1,0 +1,43 @@
+import static smrl.mr.language.Operations.*;
+import smrl.mr.language.Action;
+
+package smrl.mr.owasp{
+
+/**
+ * After a session timeout the user should not be able to perform an action that requires to be logged in.
+ * 
+ * This MR iterates over all the actions to find actions executed within a session, after login.
+ * 
+ * The 1st parameter of the operator IMPLIES is a boolean expression with three clauses joined 
+ * with logical conjunction.
+ * The 1st clause checks that the action is generally not available without login.
+ * The 2nd clause checks  if the session is not null.
+ * The 3rd clause checks that a session timeout is set
+ * The 4th clause defines a follow-up input where the selected action is executed after timeout (usually simulated).
+ * 
+ * The 2nd parameter of IMPLIES checks if the output of the action generated after timeout is different than
+ * in the case in which it is executed before the timeout.
+ *   
+ */ 
+MR OTG_SESS_007 {
+	{
+		for ( Action action : Input(1).actions() ){
+				IMPLIES ( 
+					notAvailableWithoutLoggingIn(action) &&
+					NOT ( NULL ( action.session ) ) &&
+					action.session.timeout > 0	&& 
+					EQUAL ( Input(2) , 
+						addAction( Input( 1 ), action.position, Wait(action.session.timeout) )) 
+					, different ( 
+						Output( Input(1), action.position ), 
+						Output( Input(2), action.position )
+					)); 
+		}
+	}
+}
+}
+
+
+
+
+

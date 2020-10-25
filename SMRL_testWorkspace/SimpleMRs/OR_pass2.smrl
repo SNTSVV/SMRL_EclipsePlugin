@@ -1,0 +1,14 @@
+import static smrl.mr.language.Operations.*
+import static smrl.mr.language.Operations.Input
+
+package smrl.mr.test.pass {
+
+MR OR_pass2 {
+	{
+		OR(
+			Input(1).equals( Input(2) ),
+				Input(1).equals( Input(1) ) );
+		}
+	
+	}
+}

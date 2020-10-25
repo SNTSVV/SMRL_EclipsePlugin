@@ -1,0 +1,37 @@
+import static smrl.mr.language.Operations.*
+
+/**
+ * This MR matches OTG_AUTHZ_002b with the difference that in this case we check for the content 
+ * provided by action (y+1).
+ * 
+ * 
+ * The MR verifies that the content provided to the original user is either an error or is not 
+ * anomalous (i.e., was already observed).
+ * 
+ * 
+ */ 
+package smrl.mr.owasp {
+  MR OTG_AUTHZ_002e {
+   {
+    	for(var x = 0; (x < Input(1).actions().size() ); x++){
+			for (var y = x+1; (isLogin(Input(1).actions().get(x)) && y < Input(1).actions().size()); y++) {
+	  			IMPLIES(
+	  				//1st par of IMPLIES including 5 clauses
+	  				(!isSupervisorOf(User(), Input(1).actions().get(y).user)) &&
+	  				cannotReachThroughGUI(User(), Input(1).actions().get(y).getUrl()) &&
+	  				EQUAL(Input(2), Input(1).actions().get(x)) &&
+	  				EQUAL(Input(3), changeCredentials(Input(2), User())) &&
+	  				EQUAL(Input(4), addAction(Input(1), y, Input(3).actions().get(0)))
+	  				,
+	  				//2nd par of IMPLIES
+	  				OR(
+	  					userCanRetrieveContent(Input(4).actions().get(y+1).getUser(), Output(Input(4), y+1))
+	  					,
+	  					Output(Input(4), y+1).isError()
+	  				)
+	  			); //end-IMPLIES
+  			} //end-for
+		} //end-for
+    }
+  } //end-MR
+} //end-package

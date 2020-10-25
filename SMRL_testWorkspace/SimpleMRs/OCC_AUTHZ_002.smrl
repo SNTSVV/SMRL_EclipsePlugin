@@ -1,0 +1,19 @@
+import static smrl.mr.language.Operations.*
+
+
+package smrl.mr.owasp {
+
+MR M_A_003 {
+	{
+	 	
+
+		for( var i = 0; i < 10; i++ ){
+		IMPLIES(
+			equal( Input(2), changeCredentials(Input(1),User()) ),
+				different(Output(Input(1)),Output(Input(2)) ) );
+		}
+	}
+}
+
+
+}

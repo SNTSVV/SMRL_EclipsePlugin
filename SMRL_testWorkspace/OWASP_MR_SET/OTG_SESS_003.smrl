@@ -1,0 +1,46 @@
+import static smrl.mr.language.Operations.*;
+import smrl.mr.language.Action;
+
+package smrl.mr.owasp{
+
+/**
+ *  
+ * A login action performed by a user already authenticated should always trigger 
+ * the generation of a new session ID.
+ * 
+ * This metamorphic relation contains two nested loops; the first iterates over the inputs 
+ * to find a sign up action, the second iterates over the actions that follow the sign up.
+ * 
+ * The second loop is necessary to check that a sign up action repeated at any point of the 
+ * action sequence leads to a new session ID.
+ * 
+ * The 1st parameter of the operator IMPLIES is a boolean expression with two clauses joined 
+ * with logical conjunction.
+ * The 1st clause checks if the current action has been performed after a login. 
+ * The 2nd clause defines a follow-up input with the sign up action being duplicated in a certain position.
+ * 
+ * The 2nd parameter of IMPLIES checks if the session ID of the response page sent after the two 
+ * successive login actions is different.
+ */ 
+MR OTG_SESS_003 {
+ { 
+	for( Action signup : Input(1).actions() ){
+		for ( var i=0; isSignup(signup) && i < Input(2).actions().size; i++ ) {
+			var f = Input(2).actions().get(i);
+			var pos = f.getPosition();
+			IMPLIES( 
+				afterLogin( f ) && 		//1st par of IMPLIES (1st clause)
+				EQUAL( Input(3), addAction( Input(2), pos+1, signup ))  //(2nd clause)
+				,
+				different( Output(Input(3), pos).getSession(), 	//2nd par of IMPLIES 
+						   Output(Input(3), pos+1).getSession()) 
+			);//end-IMPLIES
+		}//end-for
+	}//end-for
+ }
+}//end-MR
+}
+
+
+
+

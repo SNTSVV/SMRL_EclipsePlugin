@@ -1,0 +1,49 @@
+import static smrl.mr.language.Operations.*
+import smrl.mr.language.Action;
+
+package smrl.mr.owasp {
+
+/**
+ * 
+ * If a redirecting URL cannot be reached by a user while navigating the user interface,
+ * the same URL, if directly requested to the server, should not 
+ * enable the same user to access a page where the click on one of its elements 
+ * (e.g., a warning message) enables the user to access the content of the URL.
+ * 
+ * The metamorphic relation iterates over all the actions of an input sequence.
+ * 
+ * The 1st parameter of IMPLIES is made of three clauses.
+ * The 1st clause checks whether the user in User() is not a supervisor of the user performing the current action.
+ * The 2nd clause verifies that the user cannot retrieve the URL of the action through the GUI 
+ * (based on the data collected by the crawler).
+ * The 3rd clause defines a follow-up input that matches the source input except that the credentials
+ * of User() are used in this case.
+ * 
+ * The 2nd parameter of IMPLIES verifies the result. It is made of three clauses.
+ * The 1st clause verifies that the original URL does not perform any redirect.
+ * The 2nd clause verifies that the original URL does not perform any redirect.
+ * The 3rd clause verifies that the follow up input does not lead to the same redirect from the original input.
+ *  
+ */ 
+  MR OTG_AUTHZ_002a {
+    {
+    	for ( Action action : Input(1).actions() ){
+    		var pos = action.getPosition();
+	  		IMPLIES(
+	  			(!isSupervisorOf(User(), action.user)) &&					// 1st par
+			  	cannotReachThroughGUI(User(), action.url) &&				//
+			    EQUAL( Input(2), changeCredentials( Input(1), User() ) )	// of IMPLIES
+				,
+				( Output(Input(1), pos).redirectURL()===null ||				//2nd par
+					Output(Input(2), pos).redirectURL()===null ) ||			//
+					NOT(													// of IMPLIES
+						EQUAL ( 
+							Output(Input(2), pos).redirectURL(), 
+							Output(Input(1), pos).redirectURL()
+						)
+					)
+			);	//end-IMPLIES
+		} //end-for
+    }
+  } //end-MR
+} //end-package

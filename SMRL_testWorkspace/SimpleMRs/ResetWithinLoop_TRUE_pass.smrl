@@ -1,0 +1,19 @@
+import static smrl.mr.language.Operations.*
+import static smrl.mr.language.Operations.Input
+import smrl.mr.language.Action;
+
+package smrl.mr.test.pass {
+
+MR ResetWithinLoop_TRUE_pass {
+	{
+		for ( Action a : Input(1).actions ){
+			TRUE(
+				EQUAL ( Input(2), Input(1) )
+			)
+		}
+	
+	}
+
+}
+
+}

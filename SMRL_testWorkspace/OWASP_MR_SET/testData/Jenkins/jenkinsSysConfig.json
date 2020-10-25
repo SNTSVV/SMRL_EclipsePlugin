@@ -1,0 +1,52 @@
+{
+	"SUT":	"Jenkins",
+	"inputFile": "./testData/Jenkins/input_FULL.json",
+	"outputFile": "./testData/Jenkins/outFolder/jenkinsResult.txt",
+	"outputStore": "./testData/Jenkins/outputStore",
+	"randomFilePathFile": "./testData/Jenkins/filePaths.txt",
+	"randomAdminFilePathFile": "./testData/Jenkins/adminFilePaths.txt",
+	"actionsChangedUrlFileName": "./testData/Jenkins/jenkinsActionsChangedUrl.json",
+	"loginParams": [
+		{
+			"loginURL": "http://192.168.56.102:8080/j_acegi_security_check",
+			"userParameter": "j_username",
+			"passwordParameter": "j_password"
+		}
+	],
+	"logoutURL": "http://192.168.56.102:8080/logout",
+	"ignoreURLs": [],
+	"confirmationTexts": ["You must use POST method to trigger builds", 
+		"The URL you're trying to access requires that requests be sent using POST (like a form submission)"],
+	"confirmationButtons": ["Retry using POST", "Proceed"],
+	"waitTimeAfterAction": 2000,
+	"signup" : {
+		"url": "http://192.168.56.102:8080/securityRealm/createAccount",
+		"userParam" : "username",
+		"passwordParams" : ["password1", "password2"],
+		"emailParam" : "email",
+		"others": []
+	},
+	"cleanUp": {
+		"class": [],
+		"script": [],
+		"attribute": {
+			"name": ["rel"],
+			"nameValue": []
+		},
+		"tag": [],
+		"id": ["header"]
+	},
+	"supervisedUser":{
+		"admin": ["user1", "user2"],
+		"user2": ["user1"]
+	},
+	"errorSigns" : {
+		"title" :[
+			"Error 404",
+			"Error 403"],
+		"content":[
+			"HTTP ERROR 403",
+			"A problem occurred while processing the request.",
+			"This XML file does not appear to have any style information associated with it."]
+	}
+}

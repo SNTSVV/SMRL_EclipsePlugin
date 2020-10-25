@@ -1,0 +1,61 @@
+import static smrl.mr.language.Operations.*
+
+package smrl.mr.owasp {
+
+   /**
+   * 
+   * 
+   * If a certain action is not available to a given user, this user should not be able to perform the action.
+   * 
+   * Assume we have two users, user a and user b. Given (1) a source input as a sequence of actions performed by a user 'a'
+   * which contains an action y that is dedicated to user a (i.e., it is not visible to user b) and (2) a follow-up input 
+   * that is a copy of that sequence which, however, includes, before action y, an action that matches action y (e.g., same
+   * URL requested) but is performed by user 'b' . 
+   * The result of action y should not be different when performed in the source input (i.e., without any action of b)
+   * or in the follow-up input (i.e., when performed also by user b). 
+   * In other words, the action of user b should be ignored by the system and not interfere with the action of user a.
+   * 
+   * 
+   * This MR contains two loops. The first iterates over the actions of the source input to identify a 
+   * login operation (action x) for user a, the second iterates over the remaining y-th actions.
+   *
+   * The 1st parameter of implies defines the follow-up input.
+   * The 1st clause checks whether the user in User() is not a supervisor of the user performing the y-th action.
+   * The 2nd clause checks that action y cannot be accessed by user b (User()).
+   * The 3rd clause defines Input(2) which just performs a login.
+   * The 4th clause defines Input(3) which just performs a login as user b.
+   * The 5th clause creates a copy of Input(1) with a login as b before action y (this way action y is performed as User b).
+   * The 6th clause adds after action y+1 (the original action y now shifted) new copy of action y (now performed by user b).
+   * The 7th clause adds after the new copy of action y a new login as user a.
+   * 
+   * The 2nd parameter of IMPLIES checks that the output of the action y in the two sequences remains the same when 
+   * performed by user a (in the follow-up sequence the action of user a is shifted by three because 
+   * three actions are introduced, the login of user b, the current action and a new login for user a).
+   *     	
+   */ 
+  MR OTG_AUTHZ_002b {
+  	{
+    	for(var x = 0; x < Input(1).actions().size() ; x++){
+			for (var y = x+1; isLogin(Input(1).actions().get(x)) && (y < Input(1).actions().size()); y++) {
+	  			IMPLIES(
+	  				//1st par of IMPLIES including 7 clauses
+	  				(!isSupervisorOf(User(), Input(1).actions().get(y).user)) &&
+	  				cannotReachThroughGUI(User(), Input(1).actions().get(y).getUrl()) &&
+	  				EQUAL(Input(2), Input(1).actions().get(x)) &&
+	  				EQUAL(Input(3), changeCredentials(Input(2), User())) &&
+	  				EQUAL(Input(4), addAction(Input(1), y, Input(3).actions().get(0))) &&
+					EQUAL(Input(5), addAction(Input(4), y+1, Input(1).actions().get(y))) &&
+					EQUAL(Input(6), addAction(Input(5), y+2, Input(1).actions().get(x) ) ) 
+	  				,
+	  				//2nd par of IMPLIES
+	  				EQUAL(
+	  					Output(Input(1), y)
+	  					,
+	  					Output(Input(6), y+3 )
+	  				)
+	  			); //end-IMPLIES
+  			} //end-for
+		} //end-for
+    }
+  } //end-MR
+} //end-package

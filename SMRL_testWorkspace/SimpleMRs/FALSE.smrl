@@ -1,0 +1,19 @@
+import static smrl.mr.language.Operations.*
+import static smrl.mr.language.Operations.Input
+
+package smrl.mr.test.pass {
+
+MR FALSE {
+	{
+		
+		for ( var i =0; i < 5 ; i++ ){
+		FALSE(
+			Input(1).equals(Input(2))
+		)
+		}
+		
+	
+	}
+}
+
+}

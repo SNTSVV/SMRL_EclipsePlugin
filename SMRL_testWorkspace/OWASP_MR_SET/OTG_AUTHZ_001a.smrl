@@ -1,0 +1,43 @@
+import static smrl.mr.language.Operations.*;
+import smrl.mr.language.Action;
+
+package smrl.mr.owasp{
+
+/**
+ * 
+ * A file path passed in a parameter should never enable a 
+ * user to access data that is not provided by the user interface.
+ *
+ * This metamorphic relation contains two nested loops; the first iterates over the actions 
+ * in the input sequence, the second iterates over the parameters of the action.
+ * 
+ * The 1st parameter of the operator IMPLIES is a boolean expression with two clauses 
+ * joined with a logical conjunction.
+ * The 1st clause defines a follow-up input that is a copy of the source input.
+ * The 2nd clause sets the value of a parameter to a random file path.
+ * 
+ * The 2nd parameter of IMPLIES verifies the result. It is implemented as an OR operation where 
+ * the 1st parameter verifies that the follow-up input leads to an error page. 
+ * The 2nd parameter deals with the case in which the generated request is valid, and 
+ * verifies that the returned content is something that the user has the right to access.
+ * 
+ */ 
+MR OTG_AUTHZ_001 {
+ {
+	for ( Action action : Input(1).actions() ){
+		for ( var par=0; par < action.getParameters().size(); par++ ){ 
+			var pos = action.getPosition();
+			IMPLIES( 
+				EQUAL( Input(2), Input(1) )	//1st par of IMPLIES (1st clause)
+			  	  && Input(2).actions().get(pos).setParameterValue(par, RandomFilePath())//(2nd clause)
+			    ,
+			    OR( 	//2nd par of IMPLIES, OR operator receiving 2 parameters
+			      isError( Output(Input(2),pos) ) 	//1st par of OR
+			      ,
+			      userCanRetrieveContent(action.getUser(), Output(Input(2),pos)) )//2nd par of OR 
+			);//end-IMPLIES
+		}//end-for
+	}//end-for
+ }
+}//end-MR
+}

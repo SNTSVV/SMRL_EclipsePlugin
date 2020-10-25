@@ -1,0 +1,76 @@
+import static smrl.mr.language.Operations.*;
+import smrl.mr.language.Action;
+import java.util.ArrayList
+
+package smrl.mr.owasp{
+
+/**
+ *  
+ * A file path passed in the URL of a request should never enable a 
+ * user to access data that is not provided by the user interface.
+ *
+ * This metamorphic relation contains two nested loops; the first is used to introduce
+ * relative paths in the query (jumps to parent folders), the second iterates over the 
+ * actions in the input sequence.
+ * 
+ * The 1st parameter of the operator IMPLIES is a boolean expression with three clauses 
+ * joined with a logical conjunction.
+ * The 1st clause verifies whether the current action has been not performed by an administrator
+ * The 2nd clause checks if the current action has been performed after a login.
+ * The 3rd clause defines a follow-up input that is a copy of the source input.
+ * The 4th clause adds to the end of the current URL a relative path to a file.
+ * The 5th clause verifies that the given path was not tried in a previous execution of 
+ * the loop (to speed up).
+ * 
+ * The 2nd parameter of IMPLIES verifies the result. It is implemented as an OR operation where 
+ * The 1st parameter verifies that the follow-up input does not lead to a file.
+ * The 2nd parameter deals with the case in which the generated request is valid, and 
+ * verifies that the returned file is something that the user has the right to access.
+ * The 3rd parameter verifies that the follow-up input leads to an error page.
+ * 
+ */ 
+MR OTG_AUTHZ_001b2 {
+{
+	var sep="/";
+	//Comment to avoid errors, but still keep this MR for future
+	
+//	for ( var par=0; par < 3; par++ ){
+//
+//		for ( Action action : Input(1).actions() ){
+//			var len = Input(1).actions().size;
+//			var newActions = new ArrayList();
+//
+//			if ( afterLogin(action) && 
+//				action.urlPath.endsWith("/") && 
+//				!isAdmin(action.user) && 
+//				notTried( action.getUser(), action.url )){
+//					
+//				for ( var j = 0; j < randomFilePathSize; j++ ){
+//					var newUrl = action.urlPath+sep+randomFilePath(j);
+//					var newAction = action.clone;
+//					newAction.url = newUrl;
+//					newActions.add(newAction);
+//
+//				}//end-for
+//
+//				EQUAL( Input(2), Input(1) ) 					//3rd clause of IMPLIES (1st par)
+//				Input(2).actions().addAll(newActions) 	//4th clause of IMPLIES (1st par)
+//
+//				for ( var j = 0; j < randomFilePathSize; j++ ){
+//					TRUE ( 	//2nd par of IMPLIES, TRUE operator receiving 3 clauses
+//							Output(Input(2),len+j).noFile() ||	//1st par of TRUE
+//							userCanRetrieveContent(				//2nd par of TRUE
+//									action.getUser(), 
+//									Output(Input(2),len+j).file()
+//									) || 								 
+//							Output(Input(2),len+j).isError()  	//3rd par of TRUE
+//						)
+//				}//end-for
+//			}//end-if
+//		}//end-for actions
+//
+//		sep=sep+"../";
+//	}//end-for
+}
+}//end-MR
+}

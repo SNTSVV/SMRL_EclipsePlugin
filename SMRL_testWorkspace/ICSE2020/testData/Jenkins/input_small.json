@@ -1,0 +1,192 @@
+{
+	"path1": [
+		{
+			"url": "http://192.168.56.102:8080/",
+			"eventType": "index",
+			"method": "get"
+		},
+		{
+			"text": "log in",
+			"id": "xpath /HTML[1]/BODY[1]/DIV[4]/DIV[2]/DIV[1]/FORM[1]/SPAN[1]/SPAN[1]/BUTTON[1]",
+			"element": "Element{node\u003d[BUTTON: null], tag\u003dBUTTON, text\u003dlog in, attributes\u003d{atusa\u003did1037324811_0, id\u003dyui-gen1-button, tabindex\u003d0, type\u003dbutton}}",
+			"eventType": "click",
+			"currentURL": "http://192.168.56.102:8080/login?from\u003d%2F",
+			"elementURL": "http://192.168.56.102:8080/j_acegi_security_check",
+			"method": "post",
+			"formInputs": [
+				{
+					"identification": {
+						"how": "id",
+						"value": "search-box"
+					},
+					"type": "text",
+					"values": [
+					]
+				},
+				{
+					"identification": {
+						"how": "id",
+						"value": "j_username"
+					},
+					"type": "text",
+					"values": [
+						"admin"
+					]
+				},
+				{
+					"identification": {
+						"how": "name",
+						"value": "j_password"
+					},
+					"type": "password",
+					"values": [
+						"adminPass"
+					]
+				}
+			]
+		},
+		{
+			"text": " slave1",
+			"id": "xpath /HTML[1]/BODY[1]/DIV[4]/DIV[1]/DIV[3]/DIV[2]/TABLE[1]/TBODY[1]/TR[4]/TH[1]/A[1]",
+			"element": "Element{node\u003d[A: null], tag\u003dA, text\u003d slave1, attributes\u003d{class\u003dmodel-link inside, href\u003d/computer/slave1/}}",
+			"eventType": "click",
+			"currentURL": "http://192.168.56.102:8080/",
+			"elementURL": "http://192.168.56.102:8080/computer/slave1/",
+			"method": "get",
+			"formInputs": [
+				{
+					"identification": {
+						"how": "id",
+						"value": "search-box"
+					},
+					"type": "text",
+					"values": [
+					]
+				},
+				{
+					"identification": {
+						"how": "id",
+						"value": "tab-1563140785334-"
+					},
+					"type": "radio",
+					"values": [
+					]
+				},
+				{
+					"identification": {
+						"how": "id",
+						"value": "tab-1563140785334-1"
+					},
+					"type": "radio",
+					"values": [
+					]
+				}
+			]
+		},
+		{
+			"text": "Launch agent",
+			"id": "xpath /HTML[1]/BODY[1]/DIV[4]/DIV[2]/FORM[1]/SPAN[1]/SPAN[1]/BUTTON[1]",
+			"element": "Element{node\u003d[BUTTON: null], tag\u003dBUTTON, text\u003dLaunch agent, attributes\u003d{id\u003dyui-gen5-button, tabindex\u003d0, type\u003dbutton}}",
+			"eventType": "click",
+			"currentURL": "http://192.168.56.102:8080/computer/slave1/",
+			"elementURL": "http://192.168.56.102:8080/computer/slave1/launchSlaveAgent",
+			"method": "post",
+			"formInputs": [
+				{
+					"identification": {
+						"how": "id",
+						"value": "search-box"
+					},
+					"type": "text",
+					"values": [
+					]
+				}
+			]
+		},
+		{
+			"text": "slave1",
+			"id": "xpath /HTML[1]/BODY[1]/DIV[2]/DIV[2]/DIV[2]/DIV[2]/UL[1]/LI[5]/A[1]",
+			"element": "Element{node\u003d[A: null], tag\u003dA, text\u003dslave1, attributes\u003d{class\u003dmodel-link inside breadcrumbBarAnchor, href\u003d/computer/slave1/}}",
+			"eventType": "click",
+			"currentURL": "http://192.168.56.102:8080/computer/slave1/log",
+			"elementURL": "http://192.168.56.102:8080/computer/slave1/",
+			"method": "get",
+			"formInputs": [
+				{
+					"identification": {
+						"how": "id",
+						"value": "search-box"
+					},
+					"type": "text",
+					"values": [
+					]
+				}
+			]
+		}
+	],
+	"path2": [
+		{
+			"url": "http://192.168.56.102:8080/",
+			"eventType": "index",
+			"method": "get"
+		},
+		{
+			"text": "log in",
+			"id": "xpath /HTML[1]/BODY[1]/DIV[4]/DIV[2]/DIV[1]/FORM[1]/SPAN[1]/SPAN[1]/BUTTON[1]",
+			"element": "Element{node=[BUTTON: null], tag=BUTTON, text=log in, attributes={atusa=id1232306490_0, id=yui-gen1-button, tabindex=0, type=button}}",
+			"eventType": "click",
+			"currentURL": "http://192.168.56.102:8080/login?from=%2F",
+			"elementURL": "http://192.168.56.102:8080/j_acegi_security_check",
+			"method": "post",
+			"formInputs": [
+				{
+					"identification": {
+						"how": "id",
+						"value": "search-box"
+					},
+					"type": "text",
+					"values": [
+					]
+				},
+				{
+					"identification": {
+						"how": "id",
+						"value": "j_username"
+					},
+					"type": "text",
+					"values": [
+						"user2"
+					]
+				},
+				{
+					"identification": {
+						"how": "name",
+						"value": "j_password"
+					},
+					"type": "text",
+					"values": [
+						"user2Pass"
+					]
+				},
+				{
+					"identification": {
+						"how": "id",
+						"value": "remember_me"
+					},
+					"type": "checkbox",
+					"values": [
+					]
+				}
+			]
+		},
+		{
+			"text": "Build listRoot",
+			"id": "xpath //*[@id=\"job_listRoot\"]/td[7]/a",
+			"element": "",
+			"eventType": "click",
+			"currentURL": "http://192.168.56.102:8080/",
+			"elementURL": "http://192.168.56.102:8080/job/listRoot/build?delay=0sec",
+			"method": "post"
+		}
+	]
+}

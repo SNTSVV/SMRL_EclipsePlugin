@@ -1,0 +1,15 @@
+import static smrl.mr.language.Operations.*
+import static smrl.mr.language.Operations.Input
+
+package smrl.mr.test.fail {
+
+MR FALSE_fail {
+	{
+		FALSE(
+			Input(1).equals(Input(1))
+		)
+	
+	}
+}
+
+}

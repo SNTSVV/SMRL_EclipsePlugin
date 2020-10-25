@@ -1,0 +1,41 @@
+import static smrl.mr.language.Operations.*;
+
+package smrl.mr.owasp{
+
+/**
+ * A logout action should always lead to a new session.
+ * 
+ * 
+ * This MR iterates over all the actions to find a logout action.
+ * The second loop iterates over all the actions to find an action performed after login.
+ * 
+ * The 1st parameter of the operator IMPLIES is a boolean expression with two clauses joined 
+ * with logical conjunction.
+ * The 1st clause checks if the current action x is a logout operation.
+ * The 2nd clause checks that the action y is performed after a login. 
+ * The 3rd clause checks that the action y is not a login.
+ * The 4th clause defines a follow-up input with the logout action being duplicated in position y.
+ * 
+ * The 2nd parameter of IMPLIES checks if the session ID before and after executing the logout is
+ * is different.
+ *   
+ */ 
+MR OTG_SESS_006 {
+	{
+		for ( var x=0; x < Input(1).actions().size() ; x++ ){
+			for ( var y=0; y < x ; y++ ){
+				IMPLIES ( isLogout( Input(1).actions().get(x) ) &&
+						  afterLogin( Input(1).actions().get(y) ) &&
+						! isLogin( Input(1).actions().get(y) ) &&
+							EQUAL ( Input(2) , copyActionTo( Input(1), x, y ) ) 
+						, different ( Session(Input(2),y-1),  Session(Input(2),y) ) ) ;
+		 	}
+		}
+	}
+}
+}
+
+
+
+
+

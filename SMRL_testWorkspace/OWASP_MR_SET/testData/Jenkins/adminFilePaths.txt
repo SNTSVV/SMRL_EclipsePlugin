@@ -1,0 +1,4 @@
+../../.././jenkins/plugins/testJob.txt
+../../.././jenkins/plugins/credentials/testJob.txt
+../../.././jenkins/users/user2/testJob.txt
+../../.././jenkins/nodes/slave1/testJob.txt

@@ -1,0 +1,11 @@
+[
+  {
+    "text": "cancel job in queue",
+    "id": "xpath //*[@id\u003d\"buildQueue\"]/div[2]/table/tbody/tr/td[2]/a",
+    "element": "Element{node\u003d[A: null], tag\u003dA, attributes\u003d{class\u003dstop-button-link, href\u003d/queue/cancelItem?id\u003d2}}",
+    "eventType": "click",
+    "currentURL": "http://192.168.56.102:8080/",
+    "elementURL": "http://192.168.56.102:8080/queue/cancelItem?id\u003d2",
+    "method": "post"
+  }
+]

@@ -1,0 +1,33 @@
+import static smrl.mr.language.Operations.*
+import static smrl.mr.language.Operations.Input
+import smrl.mr.language.Action;
+
+package smrl.mr.test.pass {
+
+MR ResetWithinLoop_TwoExpressions_TRUE_pass {
+	{
+		for ( Action a : Input(1).actions ){
+			System.out.println("ONE");
+			TRUE(
+				EQUAL ( Input(2), Input(1) )
+			)
+			
+			System.out.println("TWO");
+			TRUE(
+				EQUAL ( Input(3), Input(1) )
+			)
+			
+			System.out.println("THREE");
+			//if it is not reset then they will be the same
+			FALSE(
+				EQUAL ( Input(2), Input(3) )
+			)
+			
+			System.out.println("DONE");
+		}
+	
+	}
+
+}
+
+}

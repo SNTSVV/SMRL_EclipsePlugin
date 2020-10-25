@@ -1,0 +1,33 @@
+{
+	"SUT":	"IWS",
+	"inputFile": "./testData/IWS/inputIWS.json",
+	"outputFile": "./testData/IWS/iwsResult.txt",
+	"outputStore": "./testData/IWS/outputStore",
+	"randomFilePathFile": "./testData/IWS/filePaths.txt",
+	"loginURL": "https://www.forDouble.blind/?q\u003dlogin",
+	"logoutURL": "https://www.forDouble.blind/?q\u003dlogout",
+	"userParameter": "edit-email",
+	"passwordParameter": "edit-passwd",
+	"ignoreURLs": [],
+	"waitTimeAfterAction": 1000,
+	"cleanUp": {
+		"class": [],
+		"script": [],
+		"attribute": {
+			"name": ["rel"],
+			"nameValue": []
+		},
+		"tag": [],
+		"id": []
+	},
+	"errorSigns":{
+		"class": ["messages error"],
+		"script": [],
+		"attribute": {
+			"name": [],
+			"nameValue": []
+		},
+		"id": [],
+		"title": ["not found"]
+	}
+}
