@@ -32,3 +32,13 @@ Please try to edit the MR (e.g., delete a white space) and save it. If the plugn
 
 If you forgot to update the runtime module as per SMRLJvmModelGenerator.java, the generated code will include an invocation of IMPLIES instead of a set of nested if conditions.
 
+
+You can test the framework by replication the demo we have shown at ICSE 2020. Please run the corresponding JUnit test case as in the following picture.
+Before executing the test, you have to download an run the virtal machine provided in our replicability package (see https://sntsvv.github.io/SMRL/ )
+
+![SMRL Executing JUnit Test](/Documentation/images/SMRL_Test.png)
+
+The exection of teh test case should lead to a failure that indicates the presence of a (real) vulnerability in Jenkins.
+
+![SMRL Test Execution Result](/Documentation/images/SMRL_TestExecution.png)
+
