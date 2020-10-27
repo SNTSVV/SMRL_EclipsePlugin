@@ -37,3 +37,8 @@ You can test the framework by replication the demo we have shown at ICSE 2020. P
 Before executing the test, you have to download an run the virtal machine provided in our replicability package (see https://sntsvv.github.io/SMRL/ )
 
 ![SMRL Executing JUnit Test](/Documentation/images/SMRL_Test.png)
+
+The exection of teh test case should lead to a failure that indicates the presence of a (real) vulnerability in Jenkins.
+
+![SMRL Test Execution Result](/Documentation/images/SMRL_TestExecution.png)
+
