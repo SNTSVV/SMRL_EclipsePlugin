@@ -9,7 +9,7 @@ Folder SMRL_testWorkspace is not a source project, it is supposed to be used whe
 
 For more information https://sntsvv.github.io/SMRL/
 
-## Setup instructions
+## Setup instructions 
 
 Import all the projects except SMRL_testWorkspace as Eclipse projects.
 
