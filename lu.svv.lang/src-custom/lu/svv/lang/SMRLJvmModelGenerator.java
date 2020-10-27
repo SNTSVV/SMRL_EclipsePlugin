@@ -65,7 +65,7 @@ import com.google.inject.Inject;
 
 }
  *
- * Please edit 'lu.svv.lang/xtend-gen/lu/svv/lang/SMRLRuntimeModule.java' after every build
+ * Please edit 'lu.svv.lang/xtend-gen/lu/svv/lang/SMRLRuntimeModule.java' accordingly, after every build
  * 
  * @author fabrizio.pastore
  *
