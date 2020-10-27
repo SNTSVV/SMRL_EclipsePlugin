@@ -8,3 +8,11 @@ Folder SMRL_testWorkspace is not a source project, it is supposed to be used whe
 
 
 For more information https://sntsvv.github.io/SMRL/
+
+## Setup instructions
+
+Import all the projects except SMRL_testWorkspace as Eclipse projects.
+
+After the projects are recompiled you need to update runtime module. Please follow the instructions in /lu.svv.lang/src-custom/lu/svv/lang/SMRLJvmModelGenerator.java
+
+To test the plugin in the development environment please setup an Eclipse Application configuration as in the following picture (note the Workspace location)
