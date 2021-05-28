@@ -34,7 +34,7 @@ If you forgot to update the runtime module as per SMRLJvmModelGenerator.java, th
 
 
 You can test the framework by replication the demo we have shown at ICSE 2020. Please run the corresponding JUnit test case as in the following picture.
-Before executing the test, you have to download an run the virtal machine provided in our replicability package (see https://sntsvv.github.io/SMRL/ )
+Before executing the test, you have to download and run the virtal machine provided in our replicability package (see https://sntsvv.github.io/SMRL/ link to https://zenodo.org/record/4752931)
 
 ![SMRL Executing JUnit Test](/Documentation/images/SMRL_Test.png)
 
