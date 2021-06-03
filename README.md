@@ -48,7 +48,7 @@ To install the latest version of 'SMRL.jar', you need to download SMRL_Library a
 
 The output in the figure below provides the following information:
 1. The failure was detected when testing the MR OTG_AUTHZ_002 (see JUnit tab).
-1. The inputs used when the falures was observed are Input(2), which is a follow-up input, and Input(1), which is a source input. They differ for the user perfoming the action (i.e., user1 VS admin), as specified in line 34 of the MR.
+1. The inputs used when the failure was observed are: Input(2), which is a follow-up input, and Input(1), which is a source input. They differ for the user perfoming the action (i.e., user1 VS admin), as specified in line 34 of the MR.
 1. The execution of the metamorphic relation lead to the collection of output information for the following inputs, in the given order, that is
     1. Input(1); indeed, it is requested in line 37 of the MR
     1. Input(1); indeed, it is the first input requsted in line 38 of the MR
