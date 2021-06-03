@@ -49,9 +49,9 @@ The output provided in the figure below provides the following information:
 The failure was detected when testing the MR OTG_AUTHZ_002 (see JUnit tab).
 The inputs used when the falures was observed are Input(2), which is a follow-up input, and Input(1), which is a source input.
 The execution of the metamorphic relation lead to the collection of output information for the following inputs, in the given order, that is
-    1. Input(1), indeed it is requested in line 20 of the MR
-    1. Input(1), indeed it is the first input requsted in line 21 of the MR
-    1. Input(2), indeed it is the second input requsted in line 21 of the MR    
+1. Input(1), indeed it is requested in line 20 of the MR
+1. Input(1), indeed it is the first input requsted in line 21 of the MR
+1. Input(2), indeed it is the second input requsted in line 21 of the MR    
 
 For all these inputs the action verified by the Output call is the third Action (i.e., the one that acesses http://192.168.56.102:8080/computer/slave1/launchSlaveAgent ). 
 
