@@ -38,7 +38,23 @@ Before executing the test, you have to download and run the virtal machine provi
 
 ![SMRL Executing JUnit Test](/Documentation/images/SMRL_Test.png)
 
-The exection of teh test case should lead to a failure that indicates the presence of a (real) vulnerability in Jenkins.
+The exection of teh test case should lead to a failure that indicates the presence of a (real) vulnerability in Jenkins, as shown in the following images.
 
 ![SMRL Test Execution Result](/Documentation/images/SMRL_TestExecution.png)
 
+In case you install the latest version of SMRL.java, you will observe an improved output, as shown in the following image.
+To install the latest version of 'SMRL.jar', you need to download SMRL_Library and compile it using ANT. It will generate a file 'SMRL.jar' that should be copied in OWASP_MR_SET/lib.
+
+The output provided in the figure below provides the following information:
+The failure was detected when testing the MR OTG_AUTHZ_002 (see JUnit tab).
+The inputs used when the falures was observed are Input(2), which is a follow-up input, and Input(1), which is a source input.
+The execution of the metamorphic relation lead to the collection of output information for the following inputs, in the given order, that is
+    1. Input(1), indeed it is requested in line 20 of the MR
+    1. Input(1), indeed it is the first input requsted in line 21 of the MR
+    1. Input(2), indeed it is the second input requsted in line 21 of the MR    
+
+For all these inputs the action verified by the Output call is the third Action (i.e., the one that acesses http://192.168.56.102:8080/computer/slave1/launchSlaveAgent ). 
+
+The information above enables the end-user to understand the problem, that is, an unauthorized user (i.e., (user1,user1Pass) ), can access a URL he should not (i.e., http://192.168.56.102:8080/computer/slave1/launchSlaveAgent). This is what characterize a real vunerability affecting Jenkis (see https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1999004).
+
+![SMRL Test Execution Result](/Documentation/images/SMRL_TestExecution_Improved.png)
