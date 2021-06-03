@@ -46,7 +46,7 @@ In case you install the latest version of SMRL.java, you will observe an improve
 
 To install the latest version of 'SMRL.jar', you need to download SMRL_Library and compile it using ANT. It will generate a file 'SMRL.jar' that should be copied in OWASP_MR_SET/lib.
 
-The output in the figure below provides the following information:
+The console output in the figure below provides the following information:
 1. The failure was detected when testing the MR OTG_AUTHZ_002 (see JUnit tab).
 1. The inputs used when the failure was observed are: Input(2), which is a follow-up input, and Input(1), which is a source input. They differ for the user perfoming the action (i.e., user1 VS admin), as specified in line 34 of the MR.
 1. The execution of the metamorphic relation lead to the collection of output information for the following inputs, in the given order, that is
