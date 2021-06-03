@@ -46,13 +46,13 @@ In case you install the latest version of SMRL.java, you will observe an improve
 
 To install the latest version of 'SMRL.jar', you need to download SMRL_Library and compile it using ANT. It will generate a file 'SMRL.jar' that should be copied in OWASP_MR_SET/lib.
 
-The output provided in the figure below provides the following information:
+The output in the figure below provides the following information:
 1. The failure was detected when testing the MR OTG_AUTHZ_002 (see JUnit tab).
 1. The inputs used when the falures was observed are Input(2), which is a follow-up input, and Input(1), which is a source input. They differ for the user perfoming the action (i.e., user1 VS admin), as specified in line 34 of the MR.
 1. The execution of the metamorphic relation lead to the collection of output information for the following inputs, in the given order, that is
-    1. Input(1), indeed it is requested in line 37 of the MR
-    1. Input(1), indeed it is the first input requsted in line 38 of the MR
-    1. Input(2), indeed it is the second input requsted in line 38 of the MR    
+    1. Input(1); indeed, it is requested in line 37 of the MR
+    1. Input(1); indeed, it is the first input requsted in line 38 of the MR
+    1. Input(2); indeed, it is the second input requsted in line 38 of the MR    
 1. For all the inputs above, the action verified by the 'Output' call is the third Action (i.e., the one that acesses http://192.168.56.102:8080/computer/slave1/launchSlaveAgent ). It means that the failure is observed when verifying the output for the third action (see iteration in Line 30). 
 
 The information above enables the end-user to understand the problem, that is, an unauthorized user (i.e., (user1,user1Pass) ), can access a URL he should not (i.e., http://192.168.56.102:8080/computer/slave1/launchSlaveAgent). This is what characterize a real vunerability affecting Jenkis (see https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1999004).
