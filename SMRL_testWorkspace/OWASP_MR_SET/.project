@@ -20,11 +20,4 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>lib/SMRL.jar</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-3-PROJECT_LOC%7D/SMRL_Library/releases/icst2020/SMRL.jar</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>
