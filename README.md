@@ -53,8 +53,8 @@ The console output in the figure below provides the following information:
     1. Input(1); indeed, it is requested in line 37 of the MR
     1. Input(1); indeed, it is the first input requsted in line 38 of the MR
     1. Input(2); indeed, it is the second input requsted in line 38 of the MR    
-1. For all the inputs above, the action verified by the 'Output' call is the third Action (i.e., the one that acesses http://192.168.56.102:8080/computer/slave1/launchSlaveAgent ). It means that the failure is observed when verifying the output for the third action (see iteration in Line 30). 
+1. For all the inputs above, the action verified by the 'Output' call is the third Action (i.e., the one that acesses http://192.168.56.102:8080/computer/slave1/launchSlaveAgent ). It means that the failure is observed when verifying the output for the fourth action (i.e., action number 3, actions are enumerated counting from 0). This happens within the iteration in Line 30. 
 
-The information above enables the end-user to understand the problem, that is, an unauthorized user (i.e., (user1,user1Pass) ), can access a URL he should not (i.e., http://192.168.56.102:8080/computer/slave1/launchSlaveAgent). This is what characterize a real vunerability affecting Jenkis (see https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1999004).
+The information above enables the end-user to understand the problem, that is, an unauthorized user (i.e., (user1,user1Pass) ), can access a URL he should not (i.e., http://192.168.56.102:8080/computer/slave1/launchSlaveAgent what is accessed by action number 3, the fourth action). This is what characterize a real vunerability affecting Jenkis (see https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1999004).
 
 ![SMRL Test Execution Result](/Documentation/images/SMRL_TestExecution_Improved.png)
