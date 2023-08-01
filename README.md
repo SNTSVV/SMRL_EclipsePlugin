@@ -16,7 +16,7 @@ For more information https://sntsvv.github.io/SMRL/
 
 2. Download [SMRL-Eclipse-Plugins.zip](https://zenodo.org/record/5562254/files/SMRL-Eclipse-Plugins.zip?download=1)
 
-3. Uncompress the donwloaded zip, it will create the folder "SMRL-export"
+3. Uncompress the downloaded zip, it will create the folder "SMRL-export"
 
 3. Start Eclipse
 
@@ -26,7 +26,16 @@ For more information https://sntsvv.github.io/SMRL/
 
 6. Click on "Local repository"
 
-7. Select the folder "SMRL-export" and provide the name SMRL to the repository as in the following picture.
+7. Select the folder "SMRL-export", provide the name SMRL to the repository, and click on "Add" as in the following picture.
+
+![Add Repository](/Documentation/images/AddRepository.png)
+
+8. In the "Install" window, unselect "Group items by category", and select SMRL as in the following
+
+![Install](/Documentation/images/Install2.png)
+
+9. Click "Next",  "Next", select "I accept the terms of this licence agreement", "Install, and "Restart now"
+
 
 
 ## Compiling the SMRL Eclipse plugin
