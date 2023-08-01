@@ -9,7 +9,27 @@ Folder SMRL_testWorkspace is not a source project, it is supposed to be used whe
 
 For more information https://sntsvv.github.io/SMRL/
 
-## Setup instructions 
+
+## Installing a pre-compiled version of the SMRL Eclipse plugin
+
+1. Install Eclipse for Java developers
+
+2. Download [SMRL-Eclipse-Plugins.zip](https://zenodo.org/record/5562254/files/SMRL-Eclipse-Plugins.zip?download=1)
+
+3. Uncompress the donwloaded zip, it will create the folder "SMRL-export"
+
+3. Start Eclipse
+
+4. Do Help > Install New Software
+
+5. Click on "Add.."
+
+6. Click on "Local repository"
+
+7. Select the folder "SMRL-export" and provide the name SMRL to the repository as in the following picture.
+
+
+## Compiling the SMRL Eclipse plugin
 
 Import all the projects except SMRL_testWorkspace as Eclipse projects.
 
