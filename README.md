@@ -22,21 +22,32 @@ For more information https://sntsvv.github.io/SMRL/
 
 4. Do Help > Install New Software
 
-5. Click on "Add.."
+5. Next to "Work with" select "-- All available sites --"
 
-6. Click on "Local repository"
+6. Under "Modeling" select "Xtext complete SDK"
 
-7. Select the folder "SMRL-export", provide the name SMRL to the repository, and click on "Add" as in the following picture.
+7. Click on "Next",  "Next", select "I accept the terms of this licence agreement", "Finish", and "Restart now"
+
+8. After Eclipse is restanted, do "Help > Install New Software"
+
+9. Click on "Add.."
+
+10. Click on "Local repository"
+
+11. Select the folder "SMRL-export", provide the name SMRL to the repository, and click on "Add" as in the following picture.
 
 ![Add Repository](/Documentation/images/AddRepository.png)
 
-8. In the "Install" window, unselect "Group items by category", and select SMRL as in the following
+12. In the "Install" window, unselect "Group items by category", and select SMRL as in the following
 
 ![Install](/Documentation/images/Install2.png)
 
-9. Click "Next",  "Next", select "I accept the terms of this licence agreement", "Install, and "Restart now"
+9. Click on "Next",  "Next", select "I accept the terms of this licence agreement", "Finish", and "Restart now"
 
-
+10. Testing the installation:
+11. Open a workspace with a SMRL prject
+12. Open a ".smrl" file, no syntax error should be shown
+13. Verify that the "src-gen" folder of teh project contains a ".java" file with the same name as the ".smrl" file above.
 
 ## Compiling the SMRL Eclipse plugin
 
