@@ -63,11 +63,12 @@ The exection of the test case should lead to a failure that indicates the presen
 
 You can install the latest version of our MST/SMRL library to observe an improved output, as shown in the following image.
 
-To install the latest version of MST, you need to 
-1. Clone https://github.com/MetamorphicSecurityTesting/MST
-2. Compile it according to instructions
-3. Copy the generated MST library jar to OWASP_MR_SET/lib
-4. In OWASP_MR_SET remove SMRL.jar from the build path and add the MST jar.
+To install the latest version of MST, you need to:
+1. Download the precompiled MST library jar from https://github.com/SNTSVV/SMRL_EclipsePlugin/blob/master/MST-1.0.0-jar-with-dependencies.jar or
+    1. Clone https://github.com/MetamorphicSecurityTesting/MST
+    1. Compile it according to instructions
+1. Copy the MST library jar to OWASP_MR_SET/lib
+1. In OWASP_MR_SET remove SMRL.jar from the build path and add the MST librray jar.
 
 The console output in the figure below provides the following information:
 1. The failure was detected when testing the MR OTG_AUTHZ_002 (see JUnit tab).
