@@ -18,36 +18,36 @@ For more information https://sntsvv.github.io/SMRL/
 
 3. Uncompress the downloaded zip, it will create the folder "SMRL-export"
 
-3. Start Eclipse
+4. Start Eclipse
 
-4. Do Help > Install New Software
+5. Do Help > Install New Software
 
-5. Next to "Work with" select "-- All available sites --"
+6. Next to "Work with" select "-- All available sites --"
 
-6. Under "Modeling" select "Xtext complete SDK"
+7. Under "Modeling" select "Xtext complete SDK"
 
-7. Click on "Next",  "Next", select "I accept the terms of this licence agreement", "Finish", and "Restart now"
+8. Click on "Next",  "Next", select "I accept the terms of this licence agreement", "Finish", and "Restart now"
 
-8. After Eclipse is restanted, do "Help > Install New Software"
+9. After Eclipse is restanted, do "Help > Install New Software"
 
-9. Click on "Add.."
+10. Click on "Add.."
 
-10. Click on "Local repository"
+11. Click on "Local repository"
 
-11. Select the folder "SMRL-export", provide the name SMRL to the repository, and click on "Add" as in the following picture.
+12. Select the folder "SMRL-export", provide the name SMRL to the repository, and click on "Add" as in the following picture.
 
 ![Add Repository](/Documentation/images/AddRepository.png)
 
-12. In the "Install" window, unselect "Group items by category", and select SMRL as in the following
+13. In the "Install" window, unselect "Group items by category", and select SMRL as in the following
 
 ![Install](/Documentation/images/Install2.png)
 
-9. Click on "Next",  "Next", select "I accept the terms of this licence agreement", "Finish", and "Restart now"
+14. Click on "Next",  "Next", select "I accept the terms of this licence agreement", "Finish", and "Restart now"
 
-10. Testing the installation:
-11. Open a workspace with a SMRL prject
-12. Open a ".smrl" file, no syntax error should be shown
-13. Verify that the "src-gen" folder of teh project contains a ".java" file with the same name as the ".smrl" file above.
+15. Testing the installation:
+16. Open a workspace with a SMRL prject
+17. Open a ".smrl" file, no syntax error should be shown
+18. Verify that the "src-gen" folder of teh project contains a ".java" file with the same name as the ".smrl" file above.
 
 ## Compiling the SMRL Eclipse plugin
 
