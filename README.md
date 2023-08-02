@@ -49,7 +49,37 @@ For more information https://sntsvv.github.io/SMRL/
 17. Open a ".smrl" file, no syntax error should be shown
 18. Verify that the "src-gen" folder of teh project contains a ".java" file with the same name as the ".smrl" file above.
 
-## Compiling the SMRL Eclipse plugin
+## Using the SMRL Eclipse plugin
+
+You can test the framework by replication the demo that we have shown at ICSE 2020. For that, please download and import into Eclipse the SMRL project at https://zenodo.org/record/5562254/files/EclipseProjectSMRL.zip?download=1
+
+The demo can be replicated by executing JUnit test cases. However, before executing the test, you have to download and run the virtal machine provided in our replicability package (see https://sntsvv.github.io/SMRL/ link to https://zenodo.org/record/4752931)
+
+![SMRL Executing JUnit Test](/Documentation/images/SMRL_Test.png)
+
+The exection of the test case should lead to a failure that indicates the presence of a (real) vulnerability in Jenkins, as shown in the following images.
+
+![SMRL Test Execution Result](/Documentation/images/SMRL_TestExecution.png)
+
+In case you install the latest version of SMRL.java, you will observe an improved output, as shown in the following image.
+
+To install the latest version of 'SMRL.jar', you need to download SMRL_Library and compile it using ANT. It will generate a file 'SMRL.jar' that should be copied in OWASP_MR_SET/lib.
+
+The console output in the figure below provides the following information:
+1. The failure was detected when testing the MR OTG_AUTHZ_002 (see JUnit tab).
+1. The inputs used when the failure was observed are: Input(2), which is a follow-up input, and Input(1), which is a source input. They differ for the user perfoming the action (i.e., user1 VS admin), as specified in line 34 of the MR.
+1. The execution of the metamorphic relation lead to the collection of output information for the following inputs, in the given order, that is
+    1. Input(1); indeed, it is requested in line 37 of the MR
+    1. Input(1); indeed, it is the first input requsted in line 38 of the MR
+    1. Input(2); indeed, it is the second input requsted in line 38 of the MR    
+1. For all the inputs above, the action verified by the 'Output' call is the third Action (i.e., the one that acesses http://192.168.56.102:8080/computer/slave1/launchSlaveAgent ). It means that the failure is observed when verifying the output for the fourth action (i.e., action number 3, actions are enumerated counting from 0). This happens within the iteration in Line 30. 
+
+The information above enables the end-user to understand the problem, that is, an unauthorized user (i.e., (user1,user1Pass) ), can access a URL he should not (i.e., http://192.168.56.102:8080/computer/slave1/launchSlaveAgent what is accessed by action number 3, the fourth action). This is what characterize a real vunerability affecting Jenkis (see https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1999004).
+
+![SMRL Test Execution Result](/Documentation/images/SMRL_TestExecution_Improved.png)
+
+
+## Compiling the SMRL Eclipse plugin (only for contributors)
 
 Import all the projects except SMRL_testWorkspace as Eclipse projects.
 
@@ -72,29 +102,3 @@ Please try to edit the MR (e.g., delete a white space) and save it. If the plugn
 
 If you forgot to update the runtime module as per SMRLJvmModelGenerator.java, the generated code will include an invocation of IMPLIES instead of a set of nested if conditions.
 
-
-You can test the framework by replication the demo we have shown at ICSE 2020. Please run the corresponding JUnit test case as in the following picture.
-Before executing the test, you have to download and run the virtal machine provided in our replicability package (see https://sntsvv.github.io/SMRL/ link to https://zenodo.org/record/4752931)
-
-![SMRL Executing JUnit Test](/Documentation/images/SMRL_Test.png)
-
-The exection of teh test case should lead to a failure that indicates the presence of a (real) vulnerability in Jenkins, as shown in the following images.
-
-![SMRL Test Execution Result](/Documentation/images/SMRL_TestExecution.png)
-
-In case you install the latest version of SMRL.java, you will observe an improved output, as shown in the following image.
-
-To install the latest version of 'SMRL.jar', you need to download SMRL_Library and compile it using ANT. It will generate a file 'SMRL.jar' that should be copied in OWASP_MR_SET/lib.
-
-The console output in the figure below provides the following information:
-1. The failure was detected when testing the MR OTG_AUTHZ_002 (see JUnit tab).
-1. The inputs used when the failure was observed are: Input(2), which is a follow-up input, and Input(1), which is a source input. They differ for the user perfoming the action (i.e., user1 VS admin), as specified in line 34 of the MR.
-1. The execution of the metamorphic relation lead to the collection of output information for the following inputs, in the given order, that is
-    1. Input(1); indeed, it is requested in line 37 of the MR
-    1. Input(1); indeed, it is the first input requsted in line 38 of the MR
-    1. Input(2); indeed, it is the second input requsted in line 38 of the MR    
-1. For all the inputs above, the action verified by the 'Output' call is the third Action (i.e., the one that acesses http://192.168.56.102:8080/computer/slave1/launchSlaveAgent ). It means that the failure is observed when verifying the output for the fourth action (i.e., action number 3, actions are enumerated counting from 0). This happens within the iteration in Line 30. 
-
-The information above enables the end-user to understand the problem, that is, an unauthorized user (i.e., (user1,user1Pass) ), can access a URL he should not (i.e., http://192.168.56.102:8080/computer/slave1/launchSlaveAgent what is accessed by action number 3, the fourth action). This is what characterize a real vunerability affecting Jenkis (see https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1999004).
-
-![SMRL Test Execution Result](/Documentation/images/SMRL_TestExecution_Improved.png)
