@@ -83,6 +83,9 @@ The information above enables the end-user to understand the problem, that is, a
 ![SMRL Test Execution Result](/Documentation/images/SMRL_TestExecution_Improved.png)
 
 
+A project with a larger catalog of MRs is available at: https://zenodo.org/record/7702754/files/Software.zip?download=1
+
+
 ## Compiling the SMRL Eclipse plugin (only for contributors)
 
 Import all the projects except SMRL_testWorkspace as Eclipse projects.
