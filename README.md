@@ -68,7 +68,7 @@ To install the latest version of MST, you need to:
     1. Clone https://github.com/MetamorphicSecurityTesting/MST
     1. Compile it according to instructions
 1. Copy the MST library jar to OWASP_MR_SET/lib
-1. In OWASP_MR_SET remove SMRL.jar from the build path and add the MST librray jar.
+1. In OWASP_MR_SET remove SMRL.jar from the build path and add the MST library jar.
 
 The console output in the figure below provides the following information:
 1. The failure was detected when testing the MR OTG_AUTHZ_002 (see JUnit tab).
